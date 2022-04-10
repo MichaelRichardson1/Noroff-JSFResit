@@ -1,0 +1,75 @@
+body {    
+    background: $colour-background;
+}
+
+.navbar {
+    padding: 20px;
+}
+
+.navbar a {
+    background: $colour-primary;    
+}
+
+.navbar a:hover {
+    background: $colour-secondary;    
+}
+
+.container {
+    width: 90%;
+    margin: 0 auto;
+}
+
+h1 {
+    margin: 0 auto;
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+img {
+    display: block;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;    
+    box-shadow: 0 0 10px $colour-ui-shadow;
+}
+
+p {
+    border-bottom: none;
+    border-top: 2px solid $colour-secondary;
+}
+
+address {
+    background: $colour-primary;
+    padding: 20px;
+}
+
+button {
+    background: $colour-secondary;
+}
+
+.navbar-nav .nav-link {
+    padding-left: 20px;
+}
+
+.page__footer {
+    text-align: center;
+    background-color: #bbbbbb;
+}
+
+.page__footer p {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.card-title {
+    text-align: center;
+    font-weight: bold;
+}
+
+.button.btn.btn-primary {
+    margin: 0 auto;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
