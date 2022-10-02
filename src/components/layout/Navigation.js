@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route, NavLink } from "react-router-do
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import Home from "../home/Home";
-import Grass from "../grass-types/Grass";
+import {Grass} from "../grass-types/Grass";
 import Contact from "../contact/Contact";
 import MonsterDetail from "../data/MonsterDetail";
 
@@ -15,13 +15,13 @@ export function Navigation() {
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="mr-auto">
-                            <NavLink exact to="/" className="nav-link">
+                            <NavLink to="/" className="nav-link">
                                 Home
                             </NavLink>
-                            <NavLink to="/grass-types" className="nav-link">
+                            <NavLink to="grass-types" className="nav-link">
                                 Grass Types
                             </NavLink>                            
-                            <NavLink to="/contact" className="nav-link">
+                            <NavLink to="contact" className="nav-link">
                                 Contact
                             </NavLink>
                         </Nav>
@@ -29,10 +29,10 @@ export function Navigation() {
                 </Navbar>
                 
                 <Routes>
-                    <Route exact="true" path="/" element={<Home />} />
-                    <Route path="/monster/:id" exact="true" component={MonsterDetail} />                    
-                    <Route path="/grass-types" element={<Grass />} />
-                    <Route path="/contact" element={<Contact />} />                    
+                    <Route path="/" element={<Home />} />
+                    <Route path="monster/:id" element={MonsterDetail} />                    
+                    <Route path="grass-types" element={<Grass />} />
+                    <Route path="contact" element={<Contact />} />                    
                 </Routes>
             </div>
         </Router>

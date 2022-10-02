@@ -23,7 +23,7 @@ function FormModal() {
 
 	return (
 		<>
-			<Button variant="dark" onClick={handleOpen}>
+			<Button variant="dark" onClick={handleOpen} style={{marginTop: 10}} >
 				Submit
 			</Button>
 
@@ -31,7 +31,7 @@ function FormModal() {
 				<Modal.Header closeButton>
 					<Modal.Title>Form Status</Modal.Title>
 				</Modal.Header>
-				<Modal.Body>Submitted Successfully! This box will close after {displayTime / 5000} seconds</Modal.Body>
+				<Modal.Body>Submitted Successfully! This box will close after {displayTime / 2000} seconds</Modal.Body>
 				<Modal.Footer>
 					<Button variant="secondary" onClick={handleClose}>
 						Close

@@ -1,1 +1,1 @@
-export const displayTime = 5000;
+export const displayTime = 2000;

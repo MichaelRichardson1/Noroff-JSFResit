@@ -6,8 +6,8 @@ import Alert from "react-bootstrap/Alert";
 import { API } from "../../constants/api";
 import MonsterCard from "../layout/MonsterCard";
 import Heading from "../layout/Heading";
-import Button from 'react-bootstrap/Button';
 import { Link } from "react-router-dom";
+
 
 function MonsterList() {
 	const [monsters, setMonsters] = useState([]);
@@ -51,8 +51,9 @@ function MonsterList() {
 					const { id, name, imageUrl, types, hp, artist, rarity } = monster;
 					return (
                     <>
+					<Link to={`monster/${id}`}>
                     <MonsterCard key={id} name={name} imageUrl={imageUrl} types={types} hp={hp} artist={artist} rarity={rarity} />
-                    <Link to={`monster/${id}`}><Button>Details Page</Button></Link>
+                    </Link>
                     </>
                 )})}
 			</Row>

@@ -1,86 +1,68 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { API } from "../../constants/api";
-import { ReactSearchAutocomplete } from 'react-search-autocomplete'
+import axios from "axios";
+import { Link } from "react-router-dom";
 
-function Search() {
+export function Search() {
 
   const [monsters, setMonsters] = useState([]);
-	const [loading, setLoading] = useState(true);
-	const [error, setError] = useState(null);
+  const [monstersId, setMonsterIds] = useState([]);
+  const [text, setText] = useState("");
+  const [suggestions, setSuggestions] = useState([]);
 
-	useEffect(function () {
-		async function fetchData() {
-			try {
-				const response = await fetch(API);
+  useEffect (() => {
+    const loadMonsters = async () => {
+      const response = await axios.get(API);
+      console.log(response.cards.name)
+      setMonsters(response.cards.name)
+      setMonsterIds(response.cards.id)
+    }
+    loadMonsters()    
+  }, [])
 
-				if (response.ok) {
-					const json = await response.json();
-					console.log(json);
-					setMonsters(json.cards);
-				} else {
-					setError("A server error occured");
-				}
-			} catch (error) {
-				setError(error.toString());
-			} finally {
-				setLoading(false);
-			}
-		}
-		fetchData();
-
-        const searchedMonsters = fetchData();
-
-        const handleOnSearch = (string, cards) => {
-            console.log(string, cards);
-          };
-        
-          const handleOnHover = (card) => {
-            console.log(card);
-          };
-        
-          const handleOnSelect = (item) => {
-            console.log(item);
-          };
-        
-          const handleOnFocus = () => {
-            console.log("Focused");
-          };
-        
-          const handleOnClear = () => {
-            console.log("Cleared");
-          };
-        
-          const formatResult = (item) => {
-            console.log(item);
-            return (
-              <div className="result-wrapper">                
-                <span className="result-span">name: {item.name}</span>
-              </div>
-            );
-          };
-
-          return (               
-                <>
-                    <div style={{ marginBottom: 20 }}>Type the name of the Pokemon here</div>
-                    <ReactSearchAutocomplete
-                        items={searchedMonsters}
-                        onSearch={handleOnSearch}
-                        onHover={handleOnHover}
-                        onSelect={handleOnSelect}
-                        onFocus={handleOnFocus}
-                        onClear={handleOnClear}
-                        styling={{ zIndex: 4 }}
-                        formatResult={formatResult}
-                        autoFocus />
-                </>
+  const onSuggestHandler = (text) => {
+    setText(text);
+    setSuggestions([]);
+  }
+  const onChangeHandler = (text) => {
+    let matches = []
+    if (text.length > 0) {
+      matches = monsters.filter(monster => {
+        const regex = new RegExp(`${text}`, "gi");
+        return monster.name.match(regex)
                 
-            
-    )}, []);
+      })
+    }    
+    console.log(matches)
+    setSuggestions(matches)
+    setText(text)
+  }
+
+  return (
+
+    <div className="container">
+
+      <input type="text" className="col-md-12 input" style={{marginTop: 20}} 
+      onChange={e => onChangeHandler(e.target.value)} 
+      value={text}
+      onBlur={() => {
+        setTimeout(() => {
+          setSuggestions([])
+        }, 100);
+      }}
       
+      />
+    
+      {suggestions && suggestions.map((suggestion, i) => 
+      <Link to={`monster/${monstersId}`}>
+        <div key={i} className="col-md-12 justify-content-md-center" 
+          onClick={() => onSuggestHandler (suggestion.name)}>{suggestion.name}</div>
+      </Link>
+      )}
+    </div>
+
+  );
+  
 }
-
-
-export default Search;
-
 

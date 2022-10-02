@@ -9,10 +9,11 @@ import Heading from "../layout/Heading";
 import Button from 'react-bootstrap/Button';
 import { Link } from "react-router-dom";
 
-function Grass() {
+export function Grass() {
 	const [monsters, setMonsters] = useState([]);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(null);
+	const filtered = monsters.filter(monster => monster.toString().includes("Grass"));
 
 	useEffect(function () {
 		async function fetchData() {
@@ -44,25 +45,20 @@ function Grass() {
 		return <Alert variant="danger">An error occured: {error}</Alert>;
 	}    
 
-	return (
-		<Container>
-			<Heading content="Pokémon" />
-			<Row>
-				{monsters.map(function (monster) {
-					const { id, name, imageUrl, types, hp, artist, rarity } = monster;
-					
-                    if (setMonsters.types.contains("Grass") || setMonsters.types.contains("grass")) {
-                        
-                    
-                        return (
-                        <>
-                            <MonsterCard key={id} name={name} imageUrl={imageUrl} types={types} hp={hp} artist={artist} rarity={rarity} />
-                            <Link to={`monster/${id}`}><Button>Details Page</Button></Link>
-                        </>
-                )}})}
-			</Row>
-		</Container>
-	);
-}
-
-export default Grass;
+			return (
+				<>
+				<Container>
+					<Heading content="Grass Type Pokémon" />
+					<Row>
+						{filtered.map(monster => {
+							const { id, name, imageUrl, types, hp, artist, rarity } = monster;
+							return (
+								<>
+									<MonsterCard key={id} name={name} imageUrl={imageUrl} types={types} hp={hp} artist={artist} rarity={rarity}/>
+									<Link to={`monster/${monster.id}`}><Button>Details Page</Button></Link>
+								</>
+						)})}
+					</Row>
+				</Container>
+				</>
+		)}

@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import FormModal from "../layout/ConfirmModal";
+import Col from "react-bootstrap/esm/Col";
 
 
 const schema = yup.object().shape({
@@ -27,16 +28,17 @@ function Contact() {
     console.log(errors);
 
     return (
+        <Col>
         <form onSubmit={handleSubmit(onSubmit)}>
-            <label>Name</label>
-            <input {...register("name")} />
+            <label for="name">Name</label>
+            <input className="col-md-8 input" {...register("name")} />
             {errors.name && <span>{errors.name.message}</span>}
 
-            <label>Telephone Number</label>
-            <input {...register("phone")} />
+            <label for="phone number">Telephone Number</label>
+            <input className="col-md-8 input"{...register("phone")} />
             {errors.phone && <span>{errors.phone.message}</span>}
 
-            <label>Query Type</label>
+            <label for="query type">Query Type</label>
             <select {...register("query")}/>
                 <option value="enquiry">Enquiry</option>
                 <option value="complaint">Complaint</option>
@@ -44,12 +46,13 @@ function Contact() {
                 <option value="general-message">General Message</option>
             {errors.query && <span>{errors.query.message}</span>}
 
-            <label>Message</label>
-            <textarea {...register("message")} />
+            <label for="message">Message</label>
+            <textarea className="col-md-8 input" style={{height: 100}} {...register("message")} />
             {errors.message && <span>{errors.message.message}</span>}
 
             <FormModal />
         </form>
+        </Col>
     );
 }
 
